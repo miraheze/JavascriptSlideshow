@@ -125,5 +125,16 @@ class JavascriptSlideshowHooks {
         return '<span class="error">JavascriptSlideshow: ' . wfMessage('javascriptslideshow-error-unknown') -> inContentLanguage() . '</span>';
     }
 
+    /**
+     * Add a CSS module with addModuleStyles to ensure it's loaded
+     * even if there is no Javascript support
+     * @return [type] [description]
+     */
+    static public function extensionHook() {
+    	global $wgOut;
+    	$wgOut->addModuleStyles('ext.slideshow.css');
+    	return true;
+    }
+
 }
 ?>

@@ -1,0 +1,52 @@
+{
+	"name": "Javascript Slideshow",
+	"version": "1.2.3",
+	"author": [
+		"Chris Reigrut",
+		"Yaron Koren",
+		"[http://www.dasch-tour.de DaSch]",
+		"Alexia E. Smith",
+		"Nick White"
+	],
+	"url": "http://www.mediawiki.org/wiki/Extension:Javascript_Slideshow",
+	"descriptionmsg": "javascriptslideshow-desc",
+	"type": "parserhook",
+	"ExtensionFunctions": [
+		"JavascriptSlideshowHooks::extensionHook"
+	],
+	"MessagesDirs": {
+		"JavascriptSlideshow": [
+			"i18n"
+		]
+	},
+	"ExtensionMessagesFiles": {
+		"JavascriptSlideshowMagic": "JavascriptSlideshow.i18n.magic.php"
+	},
+	"AutoloadClasses": {
+		"JavascriptSlideshowHooks": "JavascriptSlideshow.hooks.php"
+	},
+	"ResourceModules": {
+		"ext.slideshow.main": {
+			"scripts": [
+				"js/slideshow.js"
+			],
+			"position": "top"
+		},
+		"ext.slideshow.css": {
+			"styles": [
+				"css/JavascriptSlideshow.css"
+			],
+			"position": "top"
+		}
+	},
+	"ResourceFileModulePaths": {
+		"localBasePath": false,
+		"remoteExtPath": "JavascriptSlideshow"
+	},
+	"Hooks": {
+		"ParserFirstCallInit": [
+			"JavascriptSlideshowHooks::wfSlideshowExtension"
+		]
+	},
+	"manifest_version": 1
+}

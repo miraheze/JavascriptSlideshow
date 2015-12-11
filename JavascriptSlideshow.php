@@ -26,8 +26,8 @@ $wgExtensionCredits['parserhook'][] = array(
 $dir = dirname(__FILE__).'/';
 
 //Internationalization
-$wgExtensionMessagesFiles['JavascriptSlideshow']		= $dir.'JavascriptSlideshow.i18n.php';
 $wgExtensionMessagesFiles['JavascriptSlideshowMagic']	= $dir.'JavascriptSlideshow.i18n.magic.php';
+$wgMessagesDirs['JavascriptSlideshow'] = __DIR__ . '/i18n';
 
 //Autoload Classes
 $wgAutoloadClasses['JavascriptSlideshowHooks'] = $dir.'JavascriptSlideshow.hooks.php';
@@ -39,21 +39,19 @@ $slideshowResourceTemplate = array(
 				'localBasePath' => $dir,
 				'remoteExtPath' => 'JavascriptSlideshow',
 		);
-		
+
 $wgResourceModules += array(
 		'ext.slideshow.main' => $slideshowResourceTemplate + array(
-				'scripts' => array('slideshow.js',),
+				'scripts' => array('js/slideshow.js'),
+				'position' => 'top'
 		),
 		'ext.slideshow.css' => $slideshowResourceTemplate + array(
-				'styles' => array('JavascriptSlideshow.css',),
+				'styles' => array('css/JavascriptSlideshow.css'),
+				'position' => 'top'
 		),
 );
 
 /* Add a CSS module with addModuleStyles to ensure it's loaded
  * even if there is no Javascript support */
-$wgExtensionFunctions[]	= function () {
-	global $wgOut;
-	$wgOut->addModuleStyles('ext.slideshow.css');
-	return true;
-}
+$wgExtensionFunctions[]	= "JavascriptSlideshowHooks::extensionHook";
 ?>
