@@ -27,6 +27,9 @@
 	},
 	"ResourceModules": {
 		"ext.slideshow.main": {
+			"dependencies":[
+                "mediawiki.jqueryMsg"
+        	],
 			"scripts": [
 				"js/slideshow.js"
 			],
@@ -40,7 +43,7 @@
 		}
 	},
 	"ResourceFileModulePaths": {
-		"localBasePath": false,
+		"localBasePath": "/",
 		"remoteExtPath": "JavascriptSlideshow"
 	},
 	"Hooks": {
