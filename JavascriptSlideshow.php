@@ -3,55 +3,20 @@
  * Javascript Slideshow
  * Javascript Slideshow Hooks
  *
- * @author 		@See $wgExtensionCredits
- * @license		GPL
- * @package		Javacsript Slideshow
- * @link		http://www.mediawiki.org/wiki/Extension:Javascript_Slideshow
- *
-**/
+ * @author  @See $wgExtensionCredits
+ * @license GPL
+ * @package Javacsript Slideshow
+ * @link    https://gitlab.com/hydrawiki/extensions/javascriptslideshow
+ **/
 
-if (!defined('MEDIAWIKI')) {
-	die();
+if (function_exists('wfLoadExtension')) {
+	wfLoadExtension('JavascriptSlideshow');
+	wfWarn(
+		'Deprecated PHP entry point used for JavascriptSlideshow extension. ' .
+		'Please use wfLoadExtension instead, ' .
+		'see https://www.mediawiki.org/wiki/Extension_registration for more details.'
+	);
+	return;
+} else {
+	die('This version of the JavascriptSlideshow extension requires MediaWiki 1.25+');
 }
-
-$wgExtensionCredits['parserhook'][] = array(
-		'path'=> __FILE__ ,
-		'name' => 'Javascript Slideshow',
-		'author' => array('Chris Reigrut', 'Yaron Koren', '[http://www.dasch-tour.de DaSch]', 'Alexia E. Smith', 'Nick White'),
-		'version' => '1.2.3',
-		'url' => 'http://www.mediawiki.org/wiki/Extension:Javascript_Slideshow',
-		'descriptionmsg' => 'javascriptslideshow-desc',
-);
-
-$dir = dirname(__FILE__).'/';
-
-//Internationalization
-$wgExtensionMessagesFiles['JavascriptSlideshowMagic']	= $dir.'JavascriptSlideshow.i18n.magic.php';
-$wgMessagesDirs['JavascriptSlideshow'] = __DIR__ . '/i18n';
-
-//Autoload Classes
-$wgAutoloadClasses['JavascriptSlideshowHooks'] = $dir.'JavascriptSlideshow.hooks.php';
-
-//Hooks
-$wgHooks['ParserFirstCallInit'][]		= 'JavascriptSlideshowHooks::wfSlideshowExtension';
-
-$slideshowResourceTemplate = array(
-				'localBasePath' => $dir,
-				'remoteExtPath' => 'JavascriptSlideshow',
-		);
-
-$wgResourceModules += array(
-		'ext.slideshow.main' => $slideshowResourceTemplate + array(
-				'scripts' => array('js/slideshow.js'),
-				'position' => 'top'
-		),
-		'ext.slideshow.css' => $slideshowResourceTemplate + array(
-				'styles' => array('css/JavascriptSlideshow.css'),
-				'position' => 'top'
-		),
-);
-
-/* Add a CSS module with addModuleStyles to ensure it's loaded
- * even if there is no Javascript support */
-$wgExtensionFunctions[]	= "JavascriptSlideshowHooks::extensionHook";
-?>
