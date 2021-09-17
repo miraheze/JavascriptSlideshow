@@ -134,11 +134,17 @@ function runSlideshow(id) {
 function startSlideshow(id) {
 	slideshowDivs[id] = getChildDivs(id);
 	if (slideshowDivs[id].length > 0) {
-		var refresh = document.getElementById(id).getAttribute("data-refresh");
+		var defaultRefresh = document.getElementById(id).getAttribute("data-refresh");
 		currentDivIndexes[id] = getInitialDivIndex(id);
+		var element = getNode(id, currentDivIndexes[id]);
+		var elementRefresh = element.data("refresh");
 		var tempFunc = function() {
+			// Slide to the next div
 			runSlideshow(id);
+			// Get new delay
+			setTimeout(tempFunc, getNode(id, currentDivIndexes[id]).data("refresh") || defaultRefresh );
 		};
-		setInterval(tempFunc, refresh);
+		// Start the slideshow using first element delay or default delay
+		setTimeout(tempFunc, elementRefresh || defaultRefresh );
 	}
 }
