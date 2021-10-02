@@ -90,7 +90,7 @@ class JavascriptSlideshowHooks {
 			return '<span class="error">JavascriptSlideshow: ' . wfMessage('javascriptslideshow-error-html5')->inContentLanguage() . '</span>';
 		}
 
-		$validSequences = ['forward', 'backward', 'random'];
+		$validSequences = ['forward', 'backward', 'random', 'shuffle'];
 		$validTransitions = ['cut', 'fade', 'blindDown'];
 
 		$id = (isset($options['id']) ? $options['id'] : 'slideshow_' . rand());

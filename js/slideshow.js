@@ -74,6 +74,10 @@ function getInitialDivIndex(id, sequence) {
 		index = (slideshowDivs[id].length) - 1;
 	} else if (sequence == 'random') {
 		index = Math.floor(Math.random() * slideshowDivs[id].length);
+	} else if (sequence == 'shuffle') {
+		// shuffle the array and pick first one
+		index = 0;
+		slideshowDivs[id] = slideshowDivs[id].sort( function() { return 0.5 - Math.random() } );
 	}
 	jQuery(slideshowDivs[id][index]).show();
 	return index;
@@ -98,6 +102,12 @@ function getNextDivIndex(id) {
 			while (index == currentDivIndexes[id]) {
 				index = Math.floor(Math.random() * slideshowDivs[id].length);
 			}
+		}
+	} else if (sequence == 'shuffle') {
+		// act the same way as 'forward'
+		index = currentDivIndexes[id] + 1;
+		if (index == slideshowDivs[id].length) {
+			index = 0;
 		}
 	}
 
