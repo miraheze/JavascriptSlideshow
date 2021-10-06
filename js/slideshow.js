@@ -65,6 +65,17 @@ function getChildDivs(id) {
 	return childDivs;
 }
 
+function shuffleArray(array) {
+	let currentIndex = array.length,  randomIndex;
+	while (currentIndex != 0) {
+		randomIndex = Math.floor(Math.random() * currentIndex);
+		currentIndex--;
+		[array[currentIndex], array[randomIndex]] = [
+			array[randomIndex], array[currentIndex]];
+	}
+	return array;
+}
+
 function getInitialDivIndex(id, sequence) {
 	var sequence = document.getElementById(id).getAttribute("data-sequence");
 	var index = -1;
@@ -77,7 +88,7 @@ function getInitialDivIndex(id, sequence) {
 	} else if (sequence == 'shuffle') {
 		// shuffle the array and pick first one
 		index = 0;
-		slideshowDivs[id] = slideshowDivs[id].sort( function() { return 0.5 - Math.random() } );
+		slideshowDivs[id] = shuffleArray(slideshowDivs[id]);
 	}
 	jQuery(slideshowDivs[id][index]).show();
 	return index;
