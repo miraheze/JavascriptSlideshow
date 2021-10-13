@@ -2,9 +2,10 @@
 var slideshowDivs = [];
 var currentDivIndexes = [];
 
-jQuery('.slideshow').each(function() {
-	id = jQuery(this).attr('id');
-	startSlideshow(id);
+$(function(){
+	$('.slideshow').each(function() {
+		startSlideshow( $(this).attr('id') );
+	});
 });
 
 function getChildMaxImgWidth(parent) {
