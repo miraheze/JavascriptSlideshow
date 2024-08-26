@@ -84,12 +84,6 @@ class JavascriptSlideshowHooks {
 	 * @return string	Rendered output
 	 */
 	private static function renderSlideshow($wikitext, $options = []) {
-		// check if HTML5 is true
-		global $wgHtml5;
-		if (!$wgHtml5) {
-			return '<span class="error">JavascriptSlideshow: ' . wfMessage('javascriptslideshow-error-html5')->inContentLanguage() . '</span>';
-		}
-
 		$validSequences = ['forward', 'backward', 'random'];
 		$validTransitions = ['cut', 'fade', 'blindDown'];
 
