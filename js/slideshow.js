@@ -170,3 +170,22 @@ function startSlideshow(id) {
 		setTimeout(tempFunc, elementRefresh || defaultRefresh );
 	}
 }
+
+jQuery(function(){
+	/*******************************
+	 * Fix for lazy-load
+	 * If the images in the container are on the screen, loaded at once without waiting for them to be shown.
+	 */
+	var intersectionObserver = new IntersectionObserver( function( entries ) {
+		entries.forEach( function( entry ) {
+			if ( entry.isIntersecting ){
+				jQuery( entry.target ).find( 'img' ).attr( 'loading', 'eager' );
+				intersectionObserver.unobserve( entry.target );
+			}
+		});
+	});
+	var observe_target = document.querySelectorAll( '.slideshow' );
+	observe_target.forEach( function( element ){
+		intersectionObserver.observe( element );
+	});
+});
