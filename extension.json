@@ -8,7 +8,7 @@
 		"Alexia E. Smith",
 		"Nick White"
 	],
-	"url": "https://gitlab.com/hydrawiki/extensions/javascriptslideshow",
+	"url": "https://github.com/miraheze/JavascriptSlideshow",
 	"descriptionmsg": "javascriptslideshow-desc",
 	"license-name": "GPL-3.0-or-later",
 	"type": "parserhook",
@@ -24,16 +24,16 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"JavascriptSlideshowMagic": "JavascriptSlideshow.i18n.magic.php"
+		"JavascriptSlideshowMagic": "JavascriptSlideshowMagic.php"
 	},
 	"AutoloadClasses": {
-		"JavascriptSlideshowHooks": "JavascriptSlideshow.hooks.php"
+		"JavascriptSlideshowHooks": "includes/JavascriptSlideshowHooks.php"
 	},
 	"ResourceModules": {
 		"ext.slideshow.main": {
 			"dependencies":[
-                "mediawiki.jqueryMsg"
-        	],
+				"mediawiki.jqueryMsg"
+			],
 			"scripts": [
 				"js/slideshow.js"
 			],
@@ -55,5 +55,5 @@
 			"JavascriptSlideshowHooks::wfSlideshowExtension"
 		]
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
