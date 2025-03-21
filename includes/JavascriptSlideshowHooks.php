@@ -1,21 +1,12 @@
 <?php
-/**
- * Javascript Slideshow
- * Javascript Slideshow Hooks
- *
- * @author  @See $wgExtensionCredits
- * @license GPL
- * @package Javacsript Slideshow
- * @link    https://gitlab.com/hydrawiki/extensions/javascriptslideshow
- **/
 
 class JavascriptSlideshowHooks {
+
 	/**
 	 * Sets up this extensions parser functions.
 	 *
-	 * @access public
-	 * @param  object	Parser object passed as a reference.
-	 * @return boolean	true
+	 * @param Parser &$parser Parser object passed as a reference.
+	 * @return bool true
 	 */
 	public static function wfSlideshowExtension(Parser &$parser) {
 		$output = RequestContext::getMain()->getOutput();
@@ -30,9 +21,8 @@ class JavascriptSlideshowHooks {
 	/**
 	 * Explodes a string that contains a space delimited array of associative key value pairs.
 	 *
-	 * @access private
-	 * @param  string	String to explode arguments from.
-	 * @return array	Constructed array of associative key value pairs.
+	 * @param string $string String to explode arguments from.
+	 * @return array Constructed array of associative key value pairs.
 	 */
 	private static function explodeArguments($string) {
 		$pairDelimiter = ' ';
@@ -54,11 +44,10 @@ class JavascriptSlideshowHooks {
 	/**
 	 * Initiates some needed classes.
 	 *
-	 * @access public
-	 * @param  object	Parser object passed as a reference.
-	 * @param  string	First argument passed to function tag, HTML input of <div> tags.
-	 * @param  string	Second argument passed to function tag, delimited list of options.
-	 * @return string	HTML output of self::renderSlideshow()
+	 * @param Parser &$parser Parser object passed as a reference.
+	 * @param string $input First argument passed to function tag, HTML input of <div> tags.
+	 * @param string $options Second argument passed to function tag, delimited list of options.
+	 * @return string HTML output of self::renderSlideshow()
 	 */
 	public static function renderSlideshowParserFunction(&$parser, $input = '', $options = '') {
 		return self::renderSlideshow($input, self::explodeArguments($options));
@@ -67,8 +56,7 @@ class JavascriptSlideshowHooks {
 	/**
 	 * The callback function for converting the input text to HTML output.
 	 *
-	 * @access public
-	 * @return void
+	 * @return string
 	 */
 	public static function renderSlideshowTag($input, $argv, $parser, $frame) {
 		$wikitext = self::renderSlideshow($input, $argv);
@@ -78,10 +66,9 @@ class JavascriptSlideshowHooks {
 	/**
 	 * Renders the slideshow information into output for the calling tag or function.
 	 *
-	 * @access public
-	 * @param  string	Combined raw HTML and wiki text.
-	 * @param  array	Options that have been parsed by self::explodeArguments()
-	 * @return string	Rendered output
+	 * @param string $wikitext Combined raw HTML and wiki text.
+	 * @param array $options Options that have been parsed by self::explodeArguments()
+	 * @return string Rendered output
 	 */
 	private static function renderSlideshow($wikitext, $options = []) {
 		$validSequences = ['forward', 'backward', 'random', 'shuffle'];
@@ -120,7 +107,7 @@ class JavascriptSlideshowHooks {
 	 * Add a CSS module with addModuleStyles to ensure it's loaded
 	 * even if there is no Javascript support
 	 *
-	 * @return [type] [description]
+	 * @return bool
 	 */
 	public static function extensionHook() {
 		global $wgOut;
