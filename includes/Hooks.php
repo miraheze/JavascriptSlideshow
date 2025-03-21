@@ -1,6 +1,11 @@
 <?php
 
-class JavascriptSlideshowHooks {
+namespace Miraheze\JavascriptSlideshow;
+
+use MediaWiki\Context\RequestContext;
+use MediaWiki\Parser\Parser;
+
+class Hooks {
 
 	/**
 	 * Sets up this extensions parser functions.
@@ -10,10 +15,10 @@ class JavascriptSlideshowHooks {
 	 */
 	public static function wfSlideshowExtension( Parser &$parser ) {
 		$output = RequestContext::getMain()->getOutput();
-		$output->addModules( 'ext.slideshow.main' );
+		$output->addModules( [ 'ext.slideshow.main' ] );
 
-		$parser->setHook( 'slideshow', 'JavascriptSlideshowHooks::renderSlideshowTag' );
-		$parser->setFunctionHook( 'slideshow', 'JavascriptSlideshowHooks::renderSlideshowParserFunction' );
+		$parser->setHook( 'slideshow', [ __CLASS__, 'renderSlideshowTag' ] );
+		$parser->setFunctionHook( 'slideshow', [ __CLASS__, 'renderSlideshowParserFunction' ] );
 
 		return true;
 	}
@@ -110,8 +115,8 @@ class JavascriptSlideshowHooks {
 	 * @return bool
 	 */
 	public static function extensionHook() {
-		global $wgOut;
-		$wgOut->addModuleStyles( 'ext.slideshow.css' );
+		$output = RequestContext::getMain()->getOutput();
+		$output->addModuleStyles( [ 'ext.slideshow.css' ] );
 		return true;
 	}
 }
