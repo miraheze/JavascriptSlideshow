@@ -33,9 +33,10 @@ class Hooks {
 		$pairDelimiter = ' ';
 		$kvDelimiter = '=';
 
-		$_pieces = explode( $pairDelimiter, $string );
-		if ( count( $_pieces ) ) {
-			foreach ( $_pieces as $value ) {
+		$arguments = [];
+		$pieces = explode( $pairDelimiter, $string );
+		if ( count( $pieces ) ) {
+			foreach ( $pieces as $value ) {
 				// We only want the information if it is a valid key value pair.
 				if ( strpos( $value, $kvDelimiter ) ) {
 					[ $key, $value ] = explode( $kvDelimiter, $value );
@@ -79,14 +80,14 @@ class Hooks {
 		$validSequences = [ 'forward', 'backward', 'random', 'shuffle' ];
 		$validTransitions = [ 'cut', 'fade', 'blindDown' ];
 
-		$id = ( isset( $options['id'] ) ? $options['id'] : 'slideshow_' . rand() );
+		$id = $options['id'] ?? ( 'slideshow_' . rand() );
 
 		// set default if not set
-		$refresh = ( isset( $options['refresh'] ) ? $options['refresh'] : '1000' );
-		$sequence = ( isset( $options['sequence'] ) ? $options['sequence'] : 'forward' );
-		$transition = ( isset( $options['transition'] ) ? $options['transition'] : 'cut' );
-		$transitiontime = ( isset( $options['transitiontime'] ) ? $options['transitiontime'] : '400' );
-		$center = ( isset( $options['center'] ) ? $options['center'] : 'false' );
+		$refresh = $options['refresh'] ?? '1000';
+		$sequence = $options['sequence'] ?? 'forward';
+		$transition = $options['transition'] ?? 'cut';
+		$transitiontime = $options['transitiontime'] ?? '400';
+		$center = $options['center'] ?? 'false';
 
 		// validate input
 		if ( !in_array( $sequence, $validSequences ) ) {
@@ -105,7 +106,6 @@ class Hooks {
 			$output .= "<div id='$id-spacer' class='slideshowspacer'></div>";
 			return $output;
 		}
-		return '<span class="error">JavascriptSlideshow: ' . wfMessage( 'javascriptslideshow-error-unknown' )->inContentLanguage() . '</span>';
 	}
 
 	/**
