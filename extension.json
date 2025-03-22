@@ -1,22 +1,23 @@
 {
 	"name": "Javascript Slideshow",
-	"version": "2.1.0",
+	"version": "2.2.0",
 	"author": [
 		"Chris Reigrut",
 		"Yaron Koren",
 		"[http://www.dasch-tour.de DaSch]",
 		"Alexia E. Smith",
-		"Nick White"
+		"Nick White",
+		"Universal Omega"
 	],
-	"url": "https://gitlab.com/hydrawiki/extensions/javascriptslideshow",
+	"url": "https://github.com/miraheze/JavascriptSlideshow",
 	"descriptionmsg": "javascriptslideshow-desc",
 	"license-name": "GPL-3.0-or-later",
 	"type": "parserhook",
 	"requires": {
-		"MediaWiki": ">= 1.34.0"
+		"MediaWiki": ">= 1.43.0"
 	},
 	"ExtensionFunctions": [
-		"JavascriptSlideshowHooks::extensionHook"
+		"Miraheze\\JavascriptSlideshow\\Hooks::extensionHook"
 	],
 	"MessagesDirs": {
 		"JavascriptSlideshow": [
@@ -24,16 +25,16 @@
 		]
 	},
 	"ExtensionMessagesFiles": {
-		"JavascriptSlideshowMagic": "JavascriptSlideshow.i18n.magic.php"
+		"JavascriptSlideshowMagic": "JavascriptSlideshowMagic.php"
 	},
-	"AutoloadClasses": {
-		"JavascriptSlideshowHooks": "JavascriptSlideshow.hooks.php"
+	"AutoloadNamespaces": {
+		"Miraheze\\JavascriptSlideshow\\": "includes/"
 	},
 	"ResourceModules": {
 		"ext.slideshow.main": {
 			"dependencies":[
-                "mediawiki.jqueryMsg"
-        	],
+				"mediawiki.jqueryMsg"
+			],
 			"scripts": [
 				"js/slideshow.js"
 			],
@@ -52,8 +53,8 @@
 	},
 	"Hooks": {
 		"ParserFirstCallInit": [
-			"JavascriptSlideshowHooks::wfSlideshowExtension"
+			"Miraheze\\JavascriptSlideshow\\Hooks::wfSlideshowExtension"
 		]
 	},
-	"manifest_version": 1
+	"manifest_version": 2
 }
